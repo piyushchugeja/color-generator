@@ -12,7 +12,7 @@ public class Main extends JFrame {
     private String characters = "0123456789ABCDEF";
     private String color = "#";
     public Main() {
-        super("Random color Generator");
+        super("Random color generator");
         icon = new ImageIcon("src\\Images\\icon.png");
         setIconImage(icon.getImage());
         makeGUI();
