@@ -1,9 +1,14 @@
 # Random color generator
 A Swing based color generating application.
 
+### Color contrast feature
+Since the background of the panel keeps changing, it may get difficult for the user to read the hex code for the new color. The contrast solves this problem. A new color is generated which is in contrast with the panel's color and the text color is set to the said color.
+
+### Previous button
+In a hurry and accidentally missed the color you wanted? No worries, the previous button is here to save you. You can go back to all the colors you generated.
+
 ### Design and use
 - It has the simplest design where you can copy the color at one click.
 
-![image](https://user-images.githubusercontent.com/66639966/189687809-54ab1cca-e8ae-415e-bc03-da0f7127ccb0.png)
-![image](https://user-images.githubusercontent.com/66639966/189687855-c6ff371c-dbe3-4f19-ae9c-cd1ebd8ca157.png)
-![image](https://user-images.githubusercontent.com/66639966/189687885-f1349e3d-b275-4662-aa01-d7d7717f8d92.png)
+![image](https://user-images.githubusercontent.com/66639966/191444770-40df8c74-2791-4575-a2a2-6c1b4b2ce184.png)
+![image](https://user-images.githubusercontent.com/66639966/191448713-9e2f5f6a-54ec-4744-8a76-87bda5e63f9c.png)
