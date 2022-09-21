@@ -1,7 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.datatransfer.*;
-
+import java.util.Vector;
 public class Main extends JFrame {
     JButton generate;
     ImageIcon icon;
