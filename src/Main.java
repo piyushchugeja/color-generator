@@ -9,8 +9,8 @@ public class Main extends JFrame {
     JPanel panel;
     GridBagLayout layout;
     private Boolean copied = false;
-    private String characters = "0123456789ABCDEF";
     private String color = "#";
+    private Vector <String> colors = new Vector<String>();
     public Main() {
         super("Random color generator");
         icon = new ImageIcon("src\\Images\\icon.png");
@@ -46,6 +46,7 @@ public class Main extends JFrame {
         generate.addActionListener(e -> {
             generateColor();
             setColor(color);
+            index = colors.size() - 1;
         });
 
         // edit label and add action listener
@@ -87,10 +88,12 @@ public class Main extends JFrame {
         colorCode.setBackground(Color.WHITE);
         panel.setBackground(Color.decode(color));
         colorCode.setToolTipText("Click to copy");
+        colors.add(color);
         copied = false;
     }
     private void generateColor() {
         color = "#";
+        String characters = "0123456789ABCDEF";
         for (int i = 0; i < 6; i++) {
             color += characters.charAt((int) (Math.random() * 16));
         }
