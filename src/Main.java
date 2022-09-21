@@ -84,7 +84,7 @@ public class Main extends JFrame {
     private void setColor(String color) {
         colorCode.setText(color);
         panel.setBackground(Color.decode(color));
-        colorCode.setForeground(ColorHelper.contrastColorByShift(Color.decode(color), 192));
+        colorCode.setForeground(ColorHelper.contrastColorByShift(Color.decode(color), 156));
         colorCode.setToolTipText("Click to copy");
         copied = false;
     }
