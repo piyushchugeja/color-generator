@@ -62,7 +62,7 @@ public class Main extends JFrame {
             if (index > 0) {
                 index--;
                 setColor(colors.get(index));
-            } else JOptionPane.showMessageDialog(null, "You have reached the last color.", "Error", JOptionPane.ERROR_MESSAGE);
+            } else JOptionPane.showMessageDialog(null, "You have reached the last color.", "Alert", JOptionPane.INFORMATION_MESSAGE);
         });
 
         // edit label and add action listener
