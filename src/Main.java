@@ -2,8 +2,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.datatransfer.*;
 import java.util.Vector;
+
 public class Main extends JFrame {
-    JButton generate;
+    JButton generate, previous;
     ImageIcon icon;
     JLabel colorCode;
     JPanel panel;
@@ -11,6 +12,7 @@ public class Main extends JFrame {
     private Boolean copied = false;
     private String color = "#";
     private Vector <String> colors = new Vector<String>();
+    private int index = 0;
     public Main() {
         super("Random color generator");
         icon = new ImageIcon("src\\Images\\icon.png");
@@ -22,7 +24,7 @@ public class Main extends JFrame {
         pack();
         setVisible(true);
         setResizable(false);
-        setSize(330, 330);
+        setSize(350, 350);
     }
     private void makeGUI() {
         // reduce tooltip's delay
@@ -30,13 +32,14 @@ public class Main extends JFrame {
 
         // initialise objects
         generate = new JButton("New color");
+        previous = new JButton("Previous");
         colorCode = new JLabel("color Code");
         layout = new GridBagLayout();
         GridBagConstraints gbc = new GridBagConstraints();
         panel = new JPanel(layout);
         setLayout(new BorderLayout());
 
-        // edit button and add action listener
+        // edit buttons and add action listener
         generate.setPreferredSize(new Dimension(120, 30));
         generate.setFont(new Font("Arial", Font.PLAIN, 17));
         generate.setForeground(Color.decode("#001100"));
@@ -49,8 +52,21 @@ public class Main extends JFrame {
             index = colors.size() - 1;
         });
 
+        previous.setPreferredSize(new Dimension(120, 30));
+        previous.setFont(new Font("Arial", Font.PLAIN, 17));
+        previous.setForeground(Color.decode("#001100"));
+        previous.setBackground(Color.decode("#F2F2F2"));
+        previous.setBorder(BorderFactory.createLineBorder(Color.decode("#414b3b"), 1, true));
+        previous.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        previous.addActionListener(e -> {
+            if (index > 0) {
+                index--;
+                setColor(colors.get(index));
+            } else JOptionPane.showMessageDialog(null, "You have reached the last color.", "Error", JOptionPane.ERROR_MESSAGE);
+        });
+
         // edit label and add action listener
-        colorCode.setFont(new Font("Arial", Font.PLAIN, 20));
+        colorCode.setFont(new Font("Arial", Font.PLAIN, 18));
         colorCode.setToolTipText("Click to copy");
         colorCode.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -62,20 +78,20 @@ public class Main extends JFrame {
                 colorCode.setToolTipText(color);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                if (copied) {
-                    colorCode.setText("Copied!");
-                }
+                if (copied) colorCode.setText("Copied!");
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                if (copied) {
-                    colorCode.setText(color);
-                }
+                if (copied) colorCode.setText(color);
             }
         });
 
         // add objects to panel
+        gbc.gridx = 1;
         panel.add(colorCode, gbc);
+        gbc.gridx = 0;
         gbc.gridy = 1;
+        panel.add(previous, gbc);
+        gbc.gridx = 2;
         panel.add(generate, gbc);
 
         // add panel to frame
@@ -84,17 +100,17 @@ public class Main extends JFrame {
     }
     private void setColor(String color) {
         colorCode.setText(color);
-        colorCode.setForeground(Color.BLACK);
-        colorCode.setBackground(Color.WHITE);
         panel.setBackground(Color.decode(color));
+        colorCode.setForeground(ColorHelper.contrastColorByShift(Color.decode(color), 156));
         colorCode.setToolTipText("Click to copy");
-        colors.add(color);
         copied = false;
+        colors.add(color);
+        previous.setEnabled(colors.size() >= 2);
     }
     private void generateColor() {
         color = "#";
-        String characters = "0123456789ABCDEF";
         for (int i = 0; i < 6; i++) {
+            String characters = "0123456789ABCDEF";
             color += characters.charAt((int) (Math.random() * 16));
         }
     }
